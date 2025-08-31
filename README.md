@@ -32,13 +32,7 @@ clangd --version    # 应显示版本号
 cmake --version     # 应显示版本号
 gcc --version       # 应显示版本号
 ```
-
-## step2 项目要求
-✅ 有规范的 CMakeLists.txt 文件
-✅ 项目能正常编译（至少cmake配置成功）
-参考这个连接: https://r3f3348v36.feishu.cn/docx/HuiGdqMw6oo7yrxb68qc6LLUnCc 来实现ASR和TTS模块, 对应代码voicd/与tts/
-
-## step3 vscode/cursor插件安装
+## step2 vscode/cursor插件安装
 ### 必装插件
 1. CMake Tools (Microsoft)
    插件ID: ms-vscode.cmake-tools
@@ -48,51 +42,12 @@ gcc --version       # 应显示版本号
    插件ID: llvm-vs-code-extensions.vscode-clangd
    作用: 代码智能感知引擎
 
-3. CMake Language Support
-   插件ID: twxs.cmake
-   作用: CMakeLists.txt语法高亮
+## step3 项目要求
+✅ 有规范的 CMakeLists.txt 文件
+✅ 项目能正常编译（至少cmake配置成功）
+参考这个连接: https://r3f3348v36.feishu.cn/docx/HuiGdqMw6oo7yrxb68qc6LLUnCc 来实现ASR和TTS模块, 对应代码voicd/与tts/
 
-### 禁用插件
-禁用/卸载: C/C++ (Microsoft)
-插件ID: ms-vscode.cpptools
-原因: 与clangd冲突，会导致双重解析
-
-## step4 配置文件
-### 创建.vscode/setting.json
-```json
-{
-    "clangd.path": "/usr/bin/clangd",
-    "clangd.arguments": [
-        "--compile-commands-dir=${workspaceFolder}",
-        "--header-insertion=never",
-        "--clang-tidy",
-        "--completion-style=detailed",
-        "--function-arg-placeholders=false",
-        "--log=info"
-    ],
-    "clangd.onConfigChanged": "restart",
-    "cmake.configureOnOpen": true,
-    "cmake.exportCompileCommandsFile": true,
-    "cmake.generator": "Unix Makefiles",
-    "cmake.parallelJobs": 4,
-    "cmake.buildDirectory": "${workspaceFolder}/build",
-    "files.associations": {
-        "*.h": "cpp",
-        "*.cc": "cpp",
-        "*.hpp": "cpp"
-    },
-    "C_Cpp.intelliSenseEngine": "disabled"
-}
-```
-### 创建c_cpp_properties.json
-没必要,作用只是当clangd + cmake tools 方案不生效时的代替.
-
-### 更新.gitignore
-一般要把build的忽略掉.
-.clangd也忽略, 其作用是加速智能感知、跳转、补全。
-compile_commands.json 是核心文件. 可以忽略也可以保留.
-
-## 创建自动化配置脚本
+## step4 创建自动化配置脚本(核心!!!), 运行脚本配置compile_commands.json, 以及生成.clangd/
 ```sh
 #!/bin/bash
 cd /home/kato/work/LLM_Voice_Flow
