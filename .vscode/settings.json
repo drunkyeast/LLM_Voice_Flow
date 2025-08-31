@@ -1,0 +1,23 @@
+{
+    "clangd.path": "/usr/bin/clangd",
+    "clangd.arguments": [
+        "--compile-commands-dir=${workspaceFolder}",
+        "--header-insertion=never",
+        "--clang-tidy",
+        "--completion-style=detailed",
+        "--function-arg-placeholders=false",
+        "--log=info"
+    ],
+    "clangd.onConfigChanged": "restart",
+    "cmake.configureOnOpen": true,
+    "cmake.exportCompileCommandsFile": true,
+    "cmake.generator": "Unix Makefiles",
+    "cmake.parallelJobs": 4,
+    "cmake.buildDirectory": "${workspaceFolder}/build",
+    "files.associations": {
+        "*.h": "cpp",
+        "*.cc": "cpp",
+        "*.hpp": "cpp"
+    },
+    "C_Cpp.intelliSenseEngine": "disabled"
+}
